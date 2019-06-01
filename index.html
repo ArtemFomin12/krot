@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Urok8</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="score"></div>
+	<div class="main">
+		<div class="hole"></div>
+		<div class="hole"></div>
+		<div class="hole"></div>
+		<div class="hole"></div>
+		<div class="hole"></div>
+		<div class="hole"></div>
+	</div>
+	<script type="text/javascript">
+		var score = document.querySelector('.score');
+		var score = 0;
+
+		var main = document.querySelector('.main');
+		var hole = document.querySelectorAll('.hole');
+
+		var img = document.createElement('img');
+		document.body.appendChild(img);
+		img.classList.add('krot');
+
+		var lastRand = 0
+		setInterval(show, 1000)
+
+		function show() {
+			var rand = Math.floor(Math.random() * hole.length);
+			if (rand != lastRand) {
+				img.src = "mole.svg";
+				img.style.top = hole[rand].getBoundingClientRect().y - 130 + "px";
+				img.style.left = hole[rand].getBoundingClientRect().x + "px";
+			}
+		}
+
+		img.onclick = function(){
+			if(score > 5){
+				main.style.display = 'none'
+				img.style.display = 'none'
+				var win = document.createElement('div')
+				document.body.appendChild(win)
+				win.classList.add('win')
+				win.innerHTML = 'You win'
+			}else{
+				score++
+				score.textContent = 'CЧЕТ', + score
+				img.style.display = 'none'
+				show()
+				img.style,display = 'inline'
+			}
+		}
+	</script>
+</body>
+</html>
